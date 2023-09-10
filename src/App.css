@@ -40,3 +40,13 @@
 .read-the-docs {
   color: #888;
 }
+
+body {
+  font-family: 'Fira Sans';
+  font-size: 22px;
+  background-image: url("IMAGENES/wallpaper.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}

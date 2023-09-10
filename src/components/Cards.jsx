@@ -1,4 +1,5 @@
 import Card from './Card';
+import styles from "./Card.module.css"
 
 export default function Cards({characters}) {
    console.log(characters);
@@ -21,3 +22,4 @@ export default function Cards({characters}) {
    </div>
    );
 }
+  
