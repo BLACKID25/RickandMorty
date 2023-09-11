@@ -7,6 +7,7 @@ export default function Cards({characters, onClose}) {
         {
            characters.map((personaje, apunt) => (
               <Card 
+               id={personaje.id}
                key={apunt} 
                name ={personaje.name}
                status ={personaje.status}
