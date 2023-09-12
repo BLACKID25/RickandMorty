@@ -8,6 +8,7 @@ export default function Detail(props) {
 const { id } = useParams()
 const [character, setCharacter] = useState ({})
 console.log(character)
+
 useEffect(() => {
     axios(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
        if (data.name) {

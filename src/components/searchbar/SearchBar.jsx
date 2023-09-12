@@ -16,14 +16,14 @@ export default function SearchBar(props) {
    }
 
    return (
-      <div>
+      <div> <hr /> 
          <input 
            value={search_id}
            type="search" 
            name="search"
            id="search"
            onChange={handleChange}
-         />
+         /> 
          <button onClick={handleClick}>Agregar</button>
       </div>
    );
