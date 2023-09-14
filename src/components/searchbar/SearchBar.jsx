@@ -25,6 +25,7 @@ export default function SearchBar(props) {
            onChange={handleChange}
          /> 
          <button onClick={handleClick}>Agregar</button>
+         
       </div>
    );
 }

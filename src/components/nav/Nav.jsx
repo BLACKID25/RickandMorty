@@ -15,12 +15,13 @@ export default function Nav( { onSearch } ) {
 
    return (
       <div>
+        <NavLink to="/home">
+            <button>Home</button> <line /> <line />
+        </NavLink>
         <NavLink to="/about">
             <button>About</button> <line />
         </NavLink>
-        <NavLink to="/home">
-            <button>Home</button> <line />
-        </NavLink>
+        <button onClick={() => window.location.href = "/login"}>Log Out</button>
        <SearchBar
        onSearch={onSearch} /> <line />
    </div>
