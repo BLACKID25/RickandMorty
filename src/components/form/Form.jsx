@@ -46,7 +46,7 @@ const [errors, seterrors] = useState({
     return (
         <form onSubmit={handleSubmit}> 
         <h2>Ready to Access Cards...</h2>
-                <label for="email">UserName: </label>
+                <label>UserName: </label>
                     <input
                         value={userData.email}
                         name="email"

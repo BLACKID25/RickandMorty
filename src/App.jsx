@@ -9,6 +9,7 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import About from "./components/about/About"
 import Detail from "./components/detail/Detail"
 import Form from "./components/form/form"
+import Favorites from './components/favorites/Favorites';
 
 function App() {
    const location = useLocation();
@@ -69,12 +70,18 @@ const navigate = useNavigate();
             <Route path = "/detail/:id" 
             element = {<Detail/>}
             />
-            <Route exact path="/" 
-            element={<Form login={login}/>}></Route>
 
+            <Route exact path="/" 
+            element={<Form login={login}/>}
+            />
+            
+            <Route path = "/favorites" 
+            element = {<Favorites onClose={onClose}/>}
+            />
+            
          </Routes>
       </div>
-       );
+  );
 }
 
 export default App;
