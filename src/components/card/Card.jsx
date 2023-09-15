@@ -21,7 +21,6 @@ import { useState, useEffect } from "react";
       setmyFav(true)
       addFav({id, name, species, gender, image, onClose})  // estamos pasando un personaje con uss propiedades
    }        // esto es lo mismo que character
-
  }
 
  useEffect(() => {
@@ -34,11 +33,8 @@ import { useState, useEffect } from "react";
 
    return (
       <div className={styles.container}>
-
       <button onClick={handleFavorite}>{myFav ? '❤️' : '🤍'}</button>
-   
-         <button onClick={onClose}>X</button>
-         
+         <button onClick={onClose}>X</button> 
          <Link to={`/detail/${id}`}>
              <h3 className="card-name">{name}</h3>
          </Link>
@@ -54,7 +50,7 @@ import { useState, useEffect } from "react";
 const mapStateToProps = (state) => {
    return {
       myFavorites: state.myFavorites
-}
+  }
 }
 // creando la funcion para despachar las 2 action creadas se importan 
 const mapDispatchToProps = (dispatch) => {

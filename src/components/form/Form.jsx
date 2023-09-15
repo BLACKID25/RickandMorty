@@ -57,7 +57,6 @@ const [errors, seterrors] = useState({
                 /> 
                 <p>{errors.email && errors.email}</p>
                 {/* Aquí vemos cómo podemos mostrar mensajes de error */}
-
                 <hr />
                 <br />
                 <label>Password: </label>
@@ -68,7 +67,6 @@ const [errors, seterrors] = useState({
                         id="password"
                         placeholder="Debe contener 6 characters"
                         onChange={handleChange}
-    
                     /> 
                 <p>{errors.password && errors.password}</p>
                 <hr />

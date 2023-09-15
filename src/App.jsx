@@ -4,11 +4,10 @@ import Nav from './components/nav/Nav';
 //import characters from './data.js';
 import { useState, useEffect } from 'react';
 import axios from "axios";
-import Error from './components/error/Error.jsx';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import About from "./components/about/About"
 import Detail from "./components/detail/Detail"
-import Form from "./components/form/form"
+import Form from "./components/form/Form"
 import Favorites from './components/favorites/Favorites';
 
 function App() {
@@ -78,7 +77,6 @@ const navigate = useNavigate();
             <Route path = "/favorites" 
             element = {<Favorites onClose={onClose}/>}
             />
-            
          </Routes>
       </div>
   );

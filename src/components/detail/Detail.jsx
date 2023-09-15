@@ -21,7 +21,6 @@ useEffect(() => {
  }, [id]);
 
     return (
-        
         <div>
             <h1>Detail</h1>
             <h2>Card N# | {character?.id}</h2>
