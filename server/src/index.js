@@ -17,6 +17,10 @@ http.createServer((req, res) => {
     }).listen(PORT, "127.0.0.1",
     () => console.log(`Server listening on port ${PORT}`)
     )
+
+
+
+    
     // //est console.log mostramos en la terminal el valor del id 
     //    //console.log(req.url.split("/").pop())
     //    // [rick, character, 2]

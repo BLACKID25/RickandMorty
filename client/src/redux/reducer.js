@@ -1,9 +1,11 @@
-import { ADD_FAV,REMOVE_FAV } from "./action-types";  // nos estamos trayendo las acction creation
+import { ADD_FAV,ORDER,REMOVE_FAV,FILTER } from "./action-types";  // nos estamos trayendo las acction creation
 
 
 
 const initialState = {
-    myFavorites: [],
+    myFavorites: [],  // [{rick}, {morty, id:2}, {beth}]
+    allCharacters: [], // va ser una copia
+    user: ""
 }
 
 const reducer = (state = initialState, {type, payload}) =>{
@@ -12,16 +14,51 @@ const reducer = (state = initialState, {type, payload}) =>{
         case ADD_FAV :
             return{
                 ...state ,
-                myFavorites:[...state.myFavorites, payload] //payload es un { onjeto}
+                allCharacters:[
+                    ...state.allCharacters, 
+                    payload],
+                    myFavorites: [...state.myFavorites, payload] //payload es un { onjeto}
                 };
        
         case REMOVE_FAV:
+            const filteredFavs = state.allCharacters.filter(fav => fav.id !== Number(payload))
             return {
                 ...state,
-                 myFavorites: state.myFavorites.filter((fav) => fav.id !== payload),
+                 allCharacters: filteredFavs,
+                 myFavorites:filteredFavs
+                
                 // vamos a modificar myfavorites, aplicamos el filter que no retorna un nuevo array
             }   // y nos vamos a quedar con todos los fav donde su ID sea distinto a l que nos envie por payload
         
+        case FILTER:
+            if (payload==="All") return {  // en caso de que queramos retornar todos de nuevo 
+                ...state,
+                myFavorites: state.allCharacters
+            }
+            const filteredCharacters = state.allCharacters.filter(cha => cha.gender === payload)
+            return{
+                ...state,
+                myFavorites: filteredCharacters
+            }
+        case ORDER:
+            let orderCopy = [...state.allCharacters]
+             if(payload==="A"){
+                 orderCopy= orderCopy.sort((a,b)=> {
+                     if (a.name > b.name) return 1;
+                     else return -1
+                    } 
+                ) 
+            } else if (payload==="D"){
+                 orderCopy= orderCopy.sort((a,b)=> {
+                     if (a.name < b.name) return 1;
+                     else return -1
+                      } 
+                ) 
+        }
+        return {
+            ...state,
+            myFavorites:orderCopy
+        }
             default:
             return {...state};
     }

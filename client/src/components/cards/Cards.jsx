@@ -9,10 +9,10 @@ export default function Cards({characters, onClose}) {
               <Card 
                id={personaje.id}
                key={apunt} 
-               name ={personaje.name}
+               name = {personaje.name}
                status ={personaje.status}
                species ={personaje.species}
-               geneder ={personaje.gender}
+               gender ={personaje.gender}
                origin ={personaje.origin.name}
                image= {personaje.image}
                onClose= {() => onClose(personaje.id)}

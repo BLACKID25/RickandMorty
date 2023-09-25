@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {addFav, removeFav} from '../../redux/actions'
 import { connect } from 'react-redux'
 import { useState, useEffect } from "react";
+import Cards from "../cards/Cards";
 
 // aplicamos destructuring a nuestro props
  function Card({myFavorites, id, name, species, status, origin, gender, image, onClose, addFav, removeFav}) {
@@ -19,7 +20,7 @@ import { useState, useEffect } from "react";
    }
    else{
       setmyFav(true)
-      addFav({id, name, species, gender, image, onClose})  // estamos pasando un personaje con uss propiedades
+      addFav({id, name, status, species, gender, image,origin, onClose})  // estamos pasando un personaje con uss propiedades
    }        // esto es lo mismo que character
  }
 
@@ -33,15 +34,15 @@ import { useState, useEffect } from "react";
 
    return (
       <div className={styles.container}>
-      <button onClick={handleFavorite}>{myFav ? '❤️' : '🤍'}</button>
-         <button onClick={onClose}>X</button> 
+      <button onClick={handleFavorite}>{myFav ? '❤️' : '🤍'}</button> 
+         <button onClick={onClose}> x </button> 
          <Link to={`/detail/${id}`}>
-             <h3 className="card-name">{name}</h3>
+             <h4 className="card-name">{name}</h4>
          </Link>
-         <h4>{status}</h4>
-         <h4>{species}</h4>
-         <h4>{gender}</h4>
-         <h4>{origin}</h4>
+         <h6>{gender}</h6>
+         <h6>{origin}</h6>
+         <h6>{species}</h6>
+         <h6>{status}</h6>
          <img src={image} alt={name} />
       </div>
    );
