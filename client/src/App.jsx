@@ -21,11 +21,21 @@ function App() {
 //Crea una función llamada "login" que reciba por parámetro "userData". Esta función tiene que preguntar si el email y password que declaraste más arriba son iguales a los que les está llegando por parámetro. En caso afirmativo, el estado local access ahora será true. Importa el hook "useNavigate" de react-router-dom y haremos que nos redirija a /home si la información es correcta.
 
 const navigate = useNavigate();
+   // function login(userData) {
+   //    if (userData.password === password && userData.email === email) {
+   //       setAccess(true);
+   //       navigate("/home");
+   //    }
+   // }
+
    function login(userData) {
-      if (userData.password === password && userData.email === email) {
-         setAccess(true);
-         navigate("/home");
-      }
+      const { email, password } = userData;
+      const URL = 'http://localhost:3001/rickandmorty/login/';
+      axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+         const { access } = data;
+         setAccess(data);
+         access && navigate('/home');
+      });
    }
 
    useEffect(() => {

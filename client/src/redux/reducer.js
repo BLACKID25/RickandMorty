@@ -11,25 +11,36 @@ const initialState = {
 const reducer = (state = initialState, {type, payload}) =>{
     
     switch(type){
-        case ADD_FAV :
-            return{
-                ...state ,
-                allCharacters:[
-                    ...state.allCharacters, 
-                    payload],
-                    myFavorites: [...state.myFavorites, payload] //payload es un { onjeto}
-                };
+        // case ADD_FAV :
+        //     return{
+        //         ...state ,
+        //         allCharacters:[
+        //             ...state.allCharacters, 
+        //             payload],
+        //             myFavorites: [...state.myFavorites, payload] //payload es un { onjeto}
+        //         };
+        case ADD_FAV:
+        return { ...state, 
+            myFavorites: payload, 
+            allCharacters: payload 
+        };
        
-        case REMOVE_FAV:
-            const filteredFavs = state.allCharacters.filter(fav => fav.id !== Number(payload))
-            return {
-                ...state,
-                 allCharacters: filteredFavs,
-                 myFavorites:filteredFavs
+        // case REMOVE_FAV:
+        //     const filteredFavs = state.allCharacters.filter(fav => fav.id !== Number(payload))
+        //     return {
+        //         ...state,
+        //          allCharacters: filteredFavs,
+        //          myFavorites:filteredFavs
                 
-                // vamos a modificar myfavorites, aplicamos el filter que no retorna un nuevo array
-            }   // y nos vamos a quedar con todos los fav donde su ID sea distinto a l que nos envie por payload
+        //         // vamos a modificar myfavorites, aplicamos el filter que no retorna un nuevo array
+        //     }   // y nos vamos a quedar con todos los fav donde su ID sea distinto a l que nos envie por payload
         
+        case REMOVE_FAV:
+            return { ...state, 
+                myFavorites: payload,
+                allCharacters: payload
+            };
+
         case FILTER:
             if (payload==="All") return {  // en caso de que queramos retornar todos de nuevo 
                 ...state,
