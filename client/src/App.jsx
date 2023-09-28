@@ -21,6 +21,7 @@ function App() {
 //Crea una función llamada "login" que reciba por parámetro "userData". Esta función tiene que preguntar si el email y password que declaraste más arriba son iguales a los que les está llegando por parámetro. En caso afirmativo, el estado local access ahora será true. Importa el hook "useNavigate" de react-router-dom y haremos que nos redirija a /home si la información es correcta.
 
 const navigate = useNavigate();
+
    // function login(userData) {
    //    if (userData.password === password && userData.email === email) {
    //       setAccess(true);
@@ -28,14 +29,33 @@ const navigate = useNavigate();
    //    }
    // }
 
-   function login(userData) {
-      const { email, password } = userData;
-      const URL = 'http://localhost:3001/rickandmorty/login/';
-      axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
-         const { access } = data;
-         setAccess(data);
+   async function login(userData) {
+      try {
+         const { email, password } = userData;
+         const URL = 'http://localhost:3001/rickandmorty/login/';
+         const {access} = (await axios(URL + `?email=${email}&password=${password}`)).data  // debe llevar el await delante de la promesa
+   //      const {data} = await axios(URL + `?email=${email}&password=${password}`)  // debe llevar el await delante de la promesa
+         setAccess(access);
+         //setAccess(data.access);
          access && navigate('/home');
-      });
+        // data.access && navigate('/home');
+        if (!access) alert("Incorrect data, please check username or password")
+      }catch (e) {
+         return alert("User not Exist")
+
+      }
+
+
+
+
+
+      // const { email, password } = userData;
+      // const URL = 'http://localhost:3001/rickandmorty/login/';
+      // axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+      //    const { access } = data;
+      //    setAccess(data);
+      //    access && navigate('/home');
+      // });
    }
 
    useEffect(() => {
@@ -43,15 +63,32 @@ const navigate = useNavigate();
    }, [access]);
 
 
-   function onSearch(id) {
-      axios(`http://localhost:3001/rickandmorty/character/${id}`)
-         .then(({ data }) => {  // { data: {personaje lo que deulveve el servidor }}
-             if (data.name) {
-               setCharacters((oldChars) => [...oldChars, data]);
-             } else {
-                window.alert('¡No hay personajes con este ID!');
-         }
-      });
+   async function onSearch(id) {
+      // validamos si existe el personaje para que no se repita 
+      const charById = characters.filter(char => char.id===Number(id)) // nos devuelve el array con el personaje [{}]
+      if (charById.length)  return alert("The Character alredy exists !!!")
+
+
+      try {
+         const { data } =  await axios(`http://localhost:3001/rickandmorty/character/${id}`)
+            setCharacters((oldChars) => [
+                ...oldChars, 
+                     data
+                  ]);
+      } catch (e){
+         alert(e)
+
+      }
+
+
+      // axios(`http://localhost:3001/rickandmorty/character/${id}`)
+      //    .then(({ data }) => {  // { data: {personaje lo que deulveve el servidor }}
+      //        if (data.name) {
+      //          setCharacters((oldChars) => [...oldChars, data]);
+      //        } else {
+      //           window.alert('¡No hay personajes con este ID!');
+      //    }
+      // });
    };
 
    const onClose = (id) => {

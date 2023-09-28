@@ -1,11 +1,13 @@
-import { ADD_FAV,ORDER,REMOVE_FAV,FILTER } from "./action-types";  // nos estamos trayendo las acction creation
+import { ADD_FAV,ORDER,REMOVE_FAV,FILTER,ERROR } from "./action-types";  // nos estamos trayendo las acction creation
 
 
 
 const initialState = {
     myFavorites: [],  // [{rick}, {morty, id:2}, {beth}]
     allCharacters: [], // va ser una copia
-    user: ""
+    user: "",
+    errors: false
+    
 }
 
 const reducer = (state = initialState, {type, payload}) =>{
@@ -70,6 +72,12 @@ const reducer = (state = initialState, {type, payload}) =>{
             ...state,
             myFavorites:orderCopy
         }
+        case ERROR:
+            return {
+                ...state,
+                errors: payload
+            }
+
             default:
             return {...state};
     }
