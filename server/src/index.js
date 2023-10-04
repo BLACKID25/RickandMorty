@@ -6,7 +6,7 @@ const server = express();
 const PORT = 3001;   // declaramos el puerto
 const router = require("./routes/index")
 const morgan = require("morgan")
-
+const { conn } = require('./DB_connection')
 
 
 //!usamos para probar las rutas con el thunder 
@@ -35,9 +35,14 @@ server.use(morgan("dev"))
 
 server.use("/rickandmorty", router)
 
-server.listen(PORT, () => {  // creamos el server con su propiedad
-   console.log('Server raised in port: ' + PORT);
-});
+conn.sync({force: true})  //* siempre devuelve una promesa 
+    .then(() => {
+
+       server.listen(PORT, () => {  // creamos el server con su propiedad
+          console.log('Server raised in port: ' + PORT);
+    })
+})
+.catch(error => console.log(error.message))
 
 
 
